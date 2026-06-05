@@ -1,0 +1,13 @@
+Excel Creator (سازنده اکسل خالق: عرفان) — Software License
+
+Copyright (c) 2026 ExcelCreator. All rights reserved.
+
+Internal / enterprise use license.
+
+Permission is granted to install and use this software within your
+organization for creating Microsoft Excel workbooks.
+
+Redistribution outside your organization requires written permission
+from the copyright holder.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.

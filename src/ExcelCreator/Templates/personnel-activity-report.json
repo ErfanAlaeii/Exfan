@@ -1,0 +1,23 @@
+{
+  "id": "personnel-activity-report",
+  "version": 1,
+  "title": "گزارش فعالیت پرسنل",
+  "description": "ثبت ورود، خروج و شرح کار هر پرسنل در یک روز کاری.",
+  "category": "منابع انسانی",
+  "icon": "👥",
+  "defaultFileName": "گزارش_فعالیت_پرسنل",
+  "workbook": {
+    "sheets": [
+      {
+        "name": "فعالیت پرسنل",
+        "features": ["freeze_header"],
+        "columns": [
+          { "header": "نام", "type": "text", "width": 22 },
+          { "header": "ساعت ورود", "type": "text", "width": 14 },
+          { "header": "ساعت خروج", "type": "text", "width": 14 },
+          { "header": "شرح کار", "type": "text", "width": 40 }
+        ]
+      }
+    ]
+  }
+}

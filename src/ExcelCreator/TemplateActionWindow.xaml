@@ -1,0 +1,88 @@
+<Window x:Class="ExcelCreator.TemplateActionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Width="560"
+        Height="420"
+        MinHeight="360"
+        MinWidth="480"
+        Background="{StaticResource SurfaceBrush}"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResize"
+        FlowDirection="LeftToRight"
+        Language="fa-IR"
+        Icon="{x:Null}">
+    <Grid Margin="28" FlowDirection="RightToLeft">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,24">
+            <TextBlock x:Name="TemplateTitleText"
+                       FontSize="22"
+                       FontWeight="Bold"
+                       Foreground="{StaticResource TextBrush}"
+                       TextAlignment="Right"/>
+            <TextBlock x:Name="ActionPromptText"
+                       FontSize="14"
+                       Foreground="{StaticResource MutedBrush}"
+                       Margin="0,8,0,0"
+                       TextAlignment="Right"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" VerticalAlignment="Center">
+            <Border Background="White"
+                    CornerRadius="12"
+                    BorderBrush="#E2E8F0"
+                    BorderThickness="1"
+                    Padding="24"
+                    Margin="0,0,0,16"
+                    Cursor="Hand"
+                    MouseLeftButtonUp="ViewExisting_Click">
+                <StackPanel>
+                    <TextBlock x:Name="ViewExistingTitle"
+                               FontSize="17"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource TextBrush}"
+                               TextAlignment="Right"/>
+                    <TextBlock x:Name="ViewExistingHint"
+                               FontSize="13"
+                               Foreground="{StaticResource MutedBrush}"
+                               Margin="0,8,0,0"
+                               TextWrapping="Wrap"
+                               TextAlignment="Right"/>
+                </StackPanel>
+            </Border>
+
+            <Border Background="White"
+                    CornerRadius="12"
+                    BorderBrush="#E2E8F0"
+                    BorderThickness="1"
+                    Padding="24"
+                    Cursor="Hand"
+                    MouseLeftButtonUp="CreateNew_Click">
+                <StackPanel>
+                    <TextBlock x:Name="CreateNewTitle"
+                               FontSize="17"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource TextBrush}"
+                               TextAlignment="Right"/>
+                    <TextBlock x:Name="CreateNewHint"
+                               FontSize="13"
+                               Foreground="{StaticResource MutedBrush}"
+                               Margin="0,8,0,0"
+                               TextWrapping="Wrap"
+                               TextAlignment="Right"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+        <Button Grid.Row="2"
+                x:Name="CancelButton"
+                Style="{StaticResource SecondaryButton}"
+                HorizontalAlignment="Right"
+                Margin="0,16,0,0"
+                Click="Cancel_Click"/>
+    </Grid>
+</Window>

@@ -1,0 +1,22 @@
+{
+  "id": "test-minimal",
+  "version": 1,
+  "title": "الگوی آزمایشی",
+  "description": "برای تست واحد",
+  "category": "آزمایش",
+  "icon": "🧪",
+  "defaultFileName": "test_output",
+  "workbook": {
+    "sheets": [
+      {
+        "name": "داده",
+        "features": ["freeze_header", "auto_filter"],
+        "columns": [
+          { "header": "نام", "type": "text", "width": 20 },
+          { "header": "تاریخ", "type": "date", "width": 14 },
+          { "header": "مبلغ", "type": "currency", "width": 12 }
+        ]
+      }
+    ]
+  }
+}
