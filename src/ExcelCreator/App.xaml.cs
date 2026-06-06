@@ -3,11 +3,11 @@ using System.IO;
 using System.Threading;
 using System.Windows;
 using ExcelCreator.Composition;
-using ExcelCreator.Infrastructure;
+using ExcelCreator.Infrastructure.Paths;
 
 namespace ExcelCreator;
 
-public partial class App : Application
+public partial class App : System.Windows.Application
 {
     protected override void OnStartup(StartupEventArgs e)
     {

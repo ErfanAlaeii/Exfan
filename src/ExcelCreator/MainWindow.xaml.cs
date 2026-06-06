@@ -1,11 +1,11 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ExcelCreator.Abstractions;
+using ExcelCreator.Core.Abstractions;
 using ExcelCreator.Composition;
 using ExcelCreator.Localization;
-using ExcelCreator.Models;
-using ExcelCreator.Services;
+using ExcelCreator.Core.Models;
+using ExcelCreator.Infrastructure;
 
 namespace ExcelCreator;
 

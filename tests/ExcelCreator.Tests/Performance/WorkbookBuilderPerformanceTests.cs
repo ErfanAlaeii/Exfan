@@ -1,5 +1,7 @@
-using ExcelCreator.Models;
-using ExcelCreator.Services;
+using ExcelCreator.Core.Models;
+using ExcelCreator.Application.Export;
+using ExcelCreator.Application.Common;
+using ExcelCreator.Application.Templates;
 using FluentAssertions;
 using ExcelCreator.Tests.Helpers;
 

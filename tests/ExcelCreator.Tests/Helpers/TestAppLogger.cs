@@ -1,6 +1,6 @@
 namespace ExcelCreator.Tests.Helpers;
 
-public sealed class TestAppLogger : ExcelCreator.Abstractions.IAppLogger
+public sealed class TestAppLogger : ExcelCreator.Core.Abstractions.IAppLogger
 {
     public List<string> Messages { get; } = [];
 

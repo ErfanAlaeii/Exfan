@@ -125,15 +125,40 @@ dotnet run --project src\ExcelCreator\ExcelCreator.csproj
 
 ```
 src/ExcelCreator/
-  Abstractions/              # ISavedTableRepository, IAppNavigator, ...
-  Composition/ServiceRegistration.cs  # DI container
-  Controls/                  # TableRowsEditor, CalendarSelectorControl
-  Excel/                     # ExcelCellFormatter, SheetFeatureApplier
-  Infrastructure/            # AppPaths, AtomicJsonStore, UiMetrics, ExcelTheme
+  App.xaml / MainWindow.xaml       # نقطه ورود و پوسته اصلی
+  Core/
+    Abstractions/                  # قراردادها (I* interfaces)
+    Models/                        # SavedTable, TableRow, TemplateDefinition, AppSettings
+    Validation/                    # TableValidator, TemplateValidator
+  Application/
+    Calculations/                  # موتور محاسبات و دکمه‌های فرمول
+    Tables/                        # SavedTableService, TableRowMapper
+    Templates/                     # TemplateService
+    Export/                        # ExcelExportFacade, ExcelWorkbookBuilder
+    Settings/                      # PresetService (تنظیمات کاربر)
+    Common/                        # DateCalendarService
+  Excel/                           # ExcelCellFormatter, SheetFeatureApplier
+  Infrastructure/
+    Persistence/                   # AtomicJsonStore, JsonDefaults
+    Logging/                       # FileAppLogger
+    Paths/                         # AppPaths, FileNameSanitizer
+  UI/
+    Windows/                       # CreateTableWindow, TableEditorWindow, ...
+    Dialogs/                       # AddRowDialog, CalculationResultDialog, ...
+    Controls/                      # TableRowsEditor, CalculationActionsControl
+    Presentation/                  # TableRowGridPresenter, WpfFileExportDialogService
+    Navigation/                    # AppNavigator
+    Resources/                     # UiMetrics
+    Themes/                        # ExcelTheme
+  Composition/ServiceRegistration.cs
   Localization/PersianStrings.cs
-  Models/                    # SavedTable, TemplateDefinition, ColumnTypes
-  Navigation/AppNavigator.cs
-  Services/                  # repositories, ExcelExportFacade
-  Validation/                # TableValidator, TemplateValidator
   Templates/*.json
+
+tests/ExcelCreator.Tests/
+  Core/Validation/
+  Application/Calculations|Tables|Templates|Export|Settings|Common/
+  UI/
+  Performance/
+  Helpers/
+  Fixtures/
 ```

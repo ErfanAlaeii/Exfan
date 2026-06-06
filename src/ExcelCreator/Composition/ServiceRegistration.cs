@@ -1,7 +1,12 @@
-using ExcelCreator.Abstractions;
-using ExcelCreator.Infrastructure;
-using ExcelCreator.Navigation;
-using ExcelCreator.Services;
+using ExcelCreator.Application.Calculations;
+using ExcelCreator.Application.Export;
+using ExcelCreator.Application.Settings;
+using ExcelCreator.Application.Tables;
+using ExcelCreator.Application.Templates;
+using ExcelCreator.Core.Abstractions;
+using ExcelCreator.Infrastructure.Logging;
+using ExcelCreator.UI.Navigation;
+using ExcelCreator.UI.Presentation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ExcelCreator.Composition;

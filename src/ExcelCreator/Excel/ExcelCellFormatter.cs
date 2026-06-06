@@ -1,7 +1,7 @@
 using ClosedXML.Excel;
-using ExcelCreator.Infrastructure;
-using ExcelCreator.Models;
-using ExcelCreator.Services;
+using ExcelCreator.Application.Common;
+using ExcelCreator.Core.Models;
+using ExcelCreator.UI.Themes;
 using System.Globalization;
 
 namespace ExcelCreator.Excel;

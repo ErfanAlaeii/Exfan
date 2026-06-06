@@ -1,0 +1,59 @@
+<UserControl x:Class="ExcelCreator.UI.Controls.TableRowsEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             FlowDirection="RightToLeft"
+             Language="fa-IR">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal"
+                    FlowDirection="RightToLeft"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,0,12">
+            <Button x:Name="AddRowButton"
+                    Style="{StaticResource PrimaryButton}"
+                    Padding="14,8"
+                    Margin="0,0,8,0"
+                    Click="AddRow_Click"/>
+            <Button x:Name="EditRowButton"
+                    Style="{StaticResource SecondaryButton}"
+                    Padding="14,8"
+                    Margin="0,0,8,0"
+                    IsEnabled="False"
+                    Click="EditRow_Click"/>
+            <Button x:Name="DeleteRowButton"
+                    Style="{StaticResource SecondaryButton}"
+                    Padding="14,8"
+                    IsEnabled="False"
+                    Click="DeleteRow_Click"/>
+        </StackPanel>
+
+        <TextBlock x:Name="EmptyText"
+                   Foreground="{StaticResource MutedBrush}"
+                   FontSize="13"
+                   TextAlignment="Right"
+                   Margin="0,0,0,12"
+                   TextWrapping="Wrap"/>
+
+        <Border BorderBrush="#E2E8F0"
+                BorderThickness="1"
+                CornerRadius="8">
+            <DataGrid x:Name="RowsGrid"
+                      AutoGenerateColumns="True"
+                      AutoGeneratingColumn="RowsGrid_AutoGeneratingColumn"
+                      IsReadOnly="True"
+                      HeadersVisibility="Column"
+                      GridLinesVisibility="Horizontal"
+                      HorizontalAlignment="Stretch"
+                      ColumnWidth="*"
+                      MinColumnWidth="100"
+                      RowHeight="36"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False"
+                      FlowDirection="RightToLeft"
+                      FontSize="13"
+                      SelectionMode="Single"
+                      SelectionChanged="RowsGrid_SelectionChanged"
+                      Background="White"
+                      BorderThickness="0"/>
+        </Border>
+    </StackPanel>
+</UserControl>
