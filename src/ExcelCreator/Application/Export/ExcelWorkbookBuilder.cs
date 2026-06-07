@@ -1,6 +1,7 @@
 using ClosedXML.Excel;
 using ExcelCreator.Core.Abstractions;
 using ExcelCreator.Excel;
+using ExcelCreator.Application.Images;
 using ExcelCreator.UI.Resources;
 using ExcelCreator.Core.Models;
 
@@ -14,17 +15,23 @@ public sealed class ExcelWorkbookBuilder : IExcelExporter
     {
         using var workbook = new XLWorkbook();
         var spec = request.Template.Workbook;
+        var imageContext = new ExcelImageExportContext();
 
         foreach (var sheetSpec in spec.Sheets)
-            AddDataSheet(workbook, sheetSpec, request);
+            AddDataSheet(workbook, sheetSpec, request, imageContext);
 
         if (workbook.Worksheets.Count > 0)
             workbook.Worksheets.First().SetTabActive();
 
         workbook.SaveAs(outputPath);
+        ExcelPictureHyperlinkApplier.Apply(outputPath, imageContext.References);
     }
 
-    private static void AddDataSheet(XLWorkbook workbook, SheetSpec sheetSpec, GenerationRequest request)
+    private static void AddDataSheet(
+        XLWorkbook workbook,
+        SheetSpec sheetSpec,
+        GenerationRequest request,
+        ExcelImageExportContext imageContext)
     {
         var sheet = workbook.Worksheets.Add(SanitizeSheetName(sheetSpec.Name));
         var columns = sheetSpec.Columns;
@@ -58,7 +65,21 @@ public sealed class ExcelWorkbookBuilder : IExcelExporter
                 }
                 else if (!string.IsNullOrWhiteSpace(value))
                 {
-                    ExcelCellFormatter.ApplyTypedValue(cell, columns[col], value, request.DateCalendar);
+                    if (ColumnTypes.IsImage(columns[col].Type))
+                    {
+                        if (!imageContext.TryExportImageCell(
+                                sheet,
+                                excelRow,
+                                col + 1,
+                                value))
+                        {
+                            cell.Value = ImageDisplayHelper.FormatGridValue(value);
+                        }
+                    }
+                    else
+                    {
+                        ExcelCellFormatter.ApplyTypedValue(cell, columns[col], value, request.DateCalendar);
+                    }
                 }
             }
         }

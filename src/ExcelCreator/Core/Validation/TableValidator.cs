@@ -1,7 +1,9 @@
 using System.Globalization;
+using System.IO;
 using ExcelCreator.Localization;
 using ExcelCreator.Core.Models;
 using ExcelCreator.Application.Common;
+using ExcelCreator.Application.Images;
 
 namespace ExcelCreator.Core.Validation;
 
@@ -108,6 +110,20 @@ public static class TableValidator
             {
                 return ValidationResult.Fail(
                     string.Format(PersianStrings.InvalidCurrencyValue, rowNumber, column.Header));
+            }
+
+            if (ColumnTypes.IsImage(column.Type) &&
+                !File.Exists(value.Trim()))
+            {
+                return ValidationResult.Fail(
+                    string.Format(PersianStrings.InvalidImageValue, rowNumber, column.Header));
+            }
+
+            if (ColumnTypes.IsImage(column.Type) &&
+                !MediaFileFormats.IsAllowed(value))
+            {
+                return ValidationResult.Fail(
+                    string.Format(PersianStrings.InvalidMediaFormat, rowNumber, column.Header));
             }
         }
 

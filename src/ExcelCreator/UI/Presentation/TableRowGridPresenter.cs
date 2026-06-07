@@ -1,5 +1,6 @@
 using System.Data;
 using ExcelCreator.Application.Common;
+using ExcelCreator.Application.Images;
 using ExcelCreator.Application.Tables;
 using ExcelCreator.Core.Models;
 using ExcelCreator.UI.Resources;
@@ -25,7 +26,9 @@ public static class TableRowGridPresenter
                 var raw = i < row.Values.Count ? row.Values[i] : string.Empty;
                 dataRow[header] = ColumnTypes.IsDate(columnTypes[i])
                     ? DateCalendarService.FormatDisplay(raw, calendar)
-                    : raw;
+                    : ColumnTypes.IsImage(columnTypes[i])
+                        ? ImageDisplayHelper.FormatGridValue(raw)
+                        : raw;
             }
 
             dataRow[TableRowMapper.TimestampColumnHeader] =

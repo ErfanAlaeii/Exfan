@@ -31,6 +31,16 @@ public static class AppPaths
 
     public static string TablesFile => Path.Combine(AppDataDirectory, "tables.json");
 
+    public static string ImagesDirectory
+    {
+        get
+        {
+            var path = Path.Combine(AppDataDirectory, "images");
+            Directory.CreateDirectory(path);
+            return path;
+        }
+    }
+
     private static void MigrateFileIfMissing(string legacyDir, string currentDir, string fileName)
     {
         var legacyPath = Path.Combine(legacyDir, fileName);

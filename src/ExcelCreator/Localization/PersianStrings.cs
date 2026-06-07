@@ -51,6 +51,20 @@ public static class PersianStrings
 
     public const string DateFormatHintJalali = "نمونه تاریخ: ۱۴۰۵/۰۳/۱۲ (شمسی)";
 
+    public const string ImageColumnHint = "روی «انتخاب فایل» کلیک کنید. تصاویر (JPG، PNG، …) و PDF پشتیبانی می‌شوند.";
+
+    public const string ImagePickButton = "انتخاب فایل";
+    public const string ImageChangeButton = "تغییر فایل";
+    public const string ImageClearButton = "حذف فایل";
+    public const string ImageNotSelected = "هنوز فایلی انتخاب نشده است.";
+    public const string ImageFileMissing = "فایل یافت نشد.";
+    public const string ImagePickerTitle = "انتخاب فایل";
+    public const string InvalidImageValue = "سطر {0} — فایل در ستون «{1}» یافت نشد.";
+    public const string InvalidMediaFormat = "سطر {0} — فرمت فایل در ستون «{1}» پشتیبانی نمی‌شود.";
+    public const string ExcelMediaClickTooltip = "یک‌بار کلیک کنید تا فایل باز شود";
+    public const string ExcelImageOpenLink = "مشاهده تصویر";
+    public const string ExcelPdfOpenLink = "مشاهده PDF";
+
 
 
     public const string AddRow = "افزودن";

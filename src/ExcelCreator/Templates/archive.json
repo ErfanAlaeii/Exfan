@@ -1,0 +1,22 @@
+{
+  "id": "archive",
+  "version": 1,
+  "title": "بایگانی",
+  "description": "ثبت شماره، موضوع و تصویر برای بایگانی اسناد.",
+  "category": "بایگانی",
+  "icon": "📁",
+  "defaultFileName": "بایگانی",
+  "workbook": {
+    "sheets": [
+      {
+        "name": "بایگانی",
+        "features": ["freeze_header", "auto_filter"],
+        "columns": [
+          { "header": "شماره", "type": "number", "width": 12 },
+          { "header": "موضوع", "type": "text", "width": 32 },
+          { "header": "تصویر", "type": "image", "width": 40 }
+        ]
+      }
+    ]
+  }
+}

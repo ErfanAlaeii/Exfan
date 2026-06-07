@@ -1,5 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
+using ExcelCreator.Composition;
+using ExcelCreator.Core.Abstractions;
 using ExcelCreator.Localization;
 using ExcelCreator.Core.Models;
 
@@ -9,6 +11,8 @@ public partial class AddRowDialog : Window
 {
     private readonly IReadOnlyList<ColumnSpec> _columns;
     private readonly DateCalendarKind _calendar;
+    private readonly IImagePickerService _imagePicker;
+    private readonly IImageStorageService _imageStorage;
     private readonly List<Control> _inputs = [];
 
     public List<string>? ResultRow { get; private set; }
@@ -17,6 +21,25 @@ public partial class AddRowDialog : Window
         Window owner,
         IReadOnlyList<ColumnSpec> columns,
         DateCalendarKind calendar,
+        IReadOnlyList<string>? initialValues = null,
+        bool isEdit = false)
+        : this(
+            owner,
+            columns,
+            calendar,
+            ServiceRegistration.GetRequiredService<IImagePickerService>(),
+            ServiceRegistration.GetRequiredService<IImageStorageService>(),
+            initialValues,
+            isEdit)
+    {
+    }
+
+    internal AddRowDialog(
+        Window owner,
+        IReadOnlyList<ColumnSpec> columns,
+        DateCalendarKind calendar,
+        IImagePickerService imagePicker,
+        IImageStorageService imageStorage,
         IReadOnlyList<string>? initialValues = null,
         bool isEdit = false)
     {
@@ -28,6 +51,8 @@ public partial class AddRowDialog : Window
         Owner = owner;
         _columns = columns;
         _calendar = calendar;
+        _imagePicker = imagePicker;
+        _imageStorage = imageStorage;
         BuildFields(initialValues);
     }
 
@@ -66,6 +91,22 @@ public partial class AddRowDialog : Window
                     combo.SelectedItem = initial;
                 input = combo;
             }
+            else if (ColumnTypes.IsImage(column.Type))
+            {
+                block.Children.Add(new TextBlock
+                {
+                    Text = PersianStrings.ImageColumnHint,
+                    FontSize = 11,
+                    Foreground = (System.Windows.Media.Brush)FindResource("MutedBrush"),
+                    Margin = new Thickness(0, 0, 0, 8),
+                    TextAlignment = TextAlignment.Right,
+                    TextWrapping = TextWrapping.Wrap
+                });
+
+                var imageField = new Controls.ImageFieldControl(_imagePicker, _imageStorage);
+                imageField.SetPath(initial);
+                input = imageField;
+            }
             else
             {
                 var box = new TextBox
@@ -78,7 +119,7 @@ public partial class AddRowDialog : Window
                 };
                 input = box;
 
-        if (column.Type.Equals(ColumnTypes.Date, StringComparison.OrdinalIgnoreCase))
+                if (column.Type.Equals(ColumnTypes.Date, StringComparison.OrdinalIgnoreCase))
                 {
                     block.Children.Add(new TextBlock
                     {
@@ -124,6 +165,7 @@ public partial class AddRowDialog : Window
     {
         TextBox box => box.Text.Trim(),
         ComboBox combo => combo.SelectedItem?.ToString()?.Trim() ?? string.Empty,
+        Controls.ImageFieldControl imageField => imageField.SelectedPath,
         _ => string.Empty
     };
 

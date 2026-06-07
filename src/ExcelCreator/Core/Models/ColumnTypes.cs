@@ -6,9 +6,10 @@ public static class ColumnTypes
     public const string Number = "number";
     public const string Date = "date";
     public const string Currency = "currency";
+    public const string Image = "image";
 
     public static IReadOnlyList<string> All { get; } =
-        [Text, Number, Date, Currency];
+        [Text, Number, Date, Currency, Image];
 
     public static bool IsKnown(string? type) =>
         All.Any(t => string.Equals(t, type, StringComparison.OrdinalIgnoreCase));
@@ -24,4 +25,7 @@ public static class ColumnTypes
 
     public static bool IsNumeric(string? type) =>
         IsNumber(type) || IsCurrency(type);
+
+    public static bool IsImage(string? type) =>
+        string.Equals(type, Image, StringComparison.OrdinalIgnoreCase);
 }
