@@ -22,8 +22,46 @@
             <Button x:Name="DeleteRowButton"
                     Style="{StaticResource SecondaryButton}"
                     Padding="14,8"
+                    Margin="0,0,8,0"
                     IsEnabled="False"
                     Click="DeleteRow_Click"/>
+            <Button x:Name="SearchRowsButton"
+                    Style="{StaticResource SecondaryButton}"
+                    Padding="14,8"
+                    Margin="0,0,8,0"
+                    IsEnabled="False"
+                    Click="SearchRows_Click"/>
+            <Button x:Name="FieldSettingsButton"
+                    Style="{StaticResource SecondaryButton}"
+                    Padding="14,8"
+                    Click="FieldSettings_Click"/>
+        </StackPanel>
+
+        <StackPanel x:Name="SearchStatusPanel"
+                    Visibility="Collapsed"
+                    Margin="0,0,0,12">
+            <StackPanel Orientation="Horizontal"
+                        FlowDirection="RightToLeft"
+                        HorizontalAlignment="Right">
+                <TextBlock x:Name="SearchSummaryText"
+                           Foreground="{StaticResource MutedBrush}"
+                           FontSize="12"
+                           TextAlignment="Right"
+                           VerticalAlignment="Center"
+                           Margin="0,0,12,0"/>
+                <Button x:Name="ClearSearchButton"
+                        Style="{StaticResource SecondaryButton}"
+                        Padding="10,6"
+                        Visibility="Collapsed"
+                        Click="ClearSearch_Click"/>
+            </StackPanel>
+            <TextBlock x:Name="SearchNoResultsText"
+                       Foreground="{StaticResource MutedBrush}"
+                       FontSize="13"
+                       TextAlignment="Right"
+                       Margin="0,8,0,0"
+                       Visibility="Collapsed"
+                       TextWrapping="Wrap"/>
         </StackPanel>
 
         <TextBlock x:Name="EmptyText"
@@ -45,13 +83,14 @@
                       HorizontalAlignment="Stretch"
                       ColumnWidth="*"
                       MinColumnWidth="100"
-                      RowHeight="36"
                       CanUserAddRows="False"
                       CanUserDeleteRows="False"
                       FlowDirection="RightToLeft"
                       FontSize="13"
                       SelectionMode="Single"
                       SelectionChanged="RowsGrid_SelectionChanged"
+                      LoadingRow="RowsGrid_LoadingRow"
+                      PreviewMouseLeftButtonUp="RowsGrid_PreviewMouseLeftButtonUp"
                       Background="White"
                       BorderThickness="0"/>
         </Border>

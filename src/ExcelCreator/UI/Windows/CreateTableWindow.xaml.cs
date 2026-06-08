@@ -1,6 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using ExcelCreator.Application.Calculations;
+using ExcelCreator.Application.Tables;
 using ExcelCreator.Core.Abstractions;
 using ExcelCreator.Composition;
 using ExcelCreator.Localization;
@@ -15,23 +16,27 @@ public partial class CreateTableWindow : Window
     private readonly SheetSpec _sheet;
     private readonly ISavedTableRepository _tables;
     private readonly IExcelExportFacade _export;
+    private readonly ITablePrintFacade _print;
     private readonly IFileExportDialogService _dialogs;
     private readonly IAppNavigator _navigator;
     private int _step;
+    private bool _columnsCustomized;
 
     public CreateTableWindow(
         TemplateDefinition template,
         DateCalendarKind defaultCalendar,
         ISavedTableRepository tables,
         IExcelExportFacade export,
+        ITablePrintFacade print,
         IFileExportDialogService dialogs,
         IAppNavigator navigator)
     {
         InitializeComponent();
         _template = template;
-        _sheet = template.RequirePrimarySheet();
+        _sheet = TableSchemaResolver.CreateEditableSheet(template);
         _tables = tables;
         _export = export;
+        _print = print;
         _dialogs = dialogs;
         _navigator = navigator;
 
@@ -42,6 +47,8 @@ public partial class CreateTableWindow : Window
         CancelButton.Content = PersianStrings.Cancel;
         BackButton.Content = PersianStrings.Back;
         ExportButton.Content = PersianStrings.ExportExcel;
+        PrintButton.Content = PersianStrings.PrintTable;
+        RowsEditor.ColumnsChanged += RowsEditor_ColumnsChanged;
         UpdateStepUi();
     }
 
@@ -67,6 +74,15 @@ public partial class CreateTableWindow : Window
     private void RowsEditor_RowsChanged(object sender, EventArgs e) =>
         CalculationActions.RefreshActions();
 
+    private void RowsEditor_ColumnsChanged(object? sender, EventArgs e)
+    {
+        _columnsCustomized = true;
+        InitializeCalculationActions();
+    }
+
+    private TemplateDefinition ExportTemplate =>
+        TableSchemaResolver.WithPrimarySheet(_template, _sheet);
+
     private void UpdateStepUi()
     {
         StepName.Visibility = Visibility.Collapsed;
@@ -74,6 +90,7 @@ public partial class CreateTableWindow : Window
         StepDataEntry.Visibility = Visibility.Collapsed;
         BackButton.Visibility = _step > 0 ? Visibility.Visible : Visibility.Collapsed;
         ExportButton.Visibility = _step == 2 ? Visibility.Visible : Visibility.Collapsed;
+        PrintButton.Visibility = _step == 2 ? Visibility.Visible : Visibility.Collapsed;
 
         switch (_step)
         {
@@ -172,6 +189,9 @@ public partial class CreateTableWindow : Window
                     .ToList()
             };
 
+            if (_columnsCustomized)
+                table.CustomColumns = TableSchemaResolver.CloneColumns(_sheet.Columns);
+
             _tables.Save(table, _template);
             _dialogs.NotifyInfo(PersianStrings.CreateTableSuccess);
 
@@ -191,7 +211,20 @@ public partial class CreateTableWindow : Window
 
         _export.ExportWithDialog(
             this,
-            _template,
+            ExportTemplate,
+            RowsEditor.Rows,
+            CalendarSelector.SelectedCalendar,
+            TableNameBox.Text.Trim());
+    }
+
+    private void Print_Click(object sender, RoutedEventArgs e)
+    {
+        if (!ValidateTableName())
+            return;
+
+        _print.PrintWithDialog(
+            this,
+            ExportTemplate,
             RowsEditor.Rows,
             CalendarSelector.SelectedCalendar,
             TableNameBox.Text.Trim());

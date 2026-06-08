@@ -76,7 +76,7 @@ public partial class AddRowDialog : Window
                 : string.Empty;
 
             Control input;
-            if (column.DropdownValues is { Count: > 0 })
+            if (column.DropdownValues is not null)
             {
                 var combo = new ComboBox
                 {
@@ -87,8 +87,15 @@ public partial class AddRowDialog : Window
                 combo.Items.Add(string.Empty);
                 foreach (var value in column.DropdownValues)
                     combo.Items.Add(value);
+
                 if (!string.IsNullOrEmpty(initial))
+                {
+                    var hasInitial = column.DropdownValues.Any(value =>
+                        string.Equals(value, initial, StringComparison.CurrentCultureIgnoreCase));
+                    if (!hasInitial)
+                        combo.Items.Add(initial);
                     combo.SelectedItem = initial;
+                }
                 input = combo;
             }
             else if (ColumnTypes.IsImage(column.Type))

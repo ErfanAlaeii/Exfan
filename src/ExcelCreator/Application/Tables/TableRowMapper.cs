@@ -18,7 +18,9 @@ public static class TableRowMapper
                 Type = column.Type,
                 Width = column.Width,
                 Formula = column.Formula,
-                DropdownValues = column.DropdownValues?.ToList()
+                DropdownValues = column.DropdownValues?.ToList(),
+                DropdownSource = column.DropdownSource,
+                Multiline = column.Multiline
             })
             .ToList();
 

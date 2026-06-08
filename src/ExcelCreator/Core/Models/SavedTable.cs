@@ -26,6 +26,9 @@ public sealed class SavedTable
     [JsonPropertyName("columnHeaders")]
     public List<string> ColumnHeaders { get; set; } = [];
 
+    [JsonPropertyName("customColumns")]
+    public List<ColumnSpec>? CustomColumns { get; set; }
+
     [JsonPropertyName("rows")]
     [JsonConverter(typeof(TableRowListJsonConverter))]
     public List<TableRow> Rows { get; set; } = [];

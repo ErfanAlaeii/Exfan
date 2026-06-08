@@ -128,6 +128,18 @@ public sealed class ColumnSpec
 
     public List<string>? DropdownValues { get; set; }
 
+
+
+    [JsonPropertyName("dropdownSource")]
+
+    public string? DropdownSource { get; set; }
+
+
+
+    [JsonPropertyName("multiline")]
+
+    public bool Multiline { get; set; }
+
 }
 
 

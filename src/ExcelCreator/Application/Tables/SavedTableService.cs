@@ -37,7 +37,7 @@ public sealed class SavedTableService : ISavedTableRepository
         if (!compatibility.IsValid)
             throw new InvalidOperationException(compatibility.Message);
 
-        var sheet = template.RequirePrimarySheet();
+        var sheet = TableSchemaResolver.ResolveSheet(template, table);
         var validation = TableValidator.ValidateRows(sheet, table.Rows, table.DateCalendar);
         if (!validation.IsValid)
             throw new InvalidOperationException(validation.Message);
@@ -47,6 +47,8 @@ public sealed class SavedTableService : ISavedTableRepository
         table.TemplateVersion = template.Version;
         table.SheetName = sheet.Name;
         table.ColumnHeaders = sheet.Columns.Select(c => c.Header).ToList();
+        if (table.CustomColumns is { Count: > 0 })
+            table.CustomColumns = TableSchemaResolver.CloneColumns(sheet.Columns);
 
         var store = LoadStore();
         var existing = store.Tables.FindIndex(t => t.Id.Equals(table.Id, StringComparison.OrdinalIgnoreCase));

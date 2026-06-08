@@ -41,6 +41,12 @@ public static class TemplateValidator
 
             if (!ColumnTypes.IsKnown(column.Type))
                 return ValidationResult.Fail($"نوع ستون «{column.Type}» پشتیبانی نمی‌شود.");
+
+            if (!string.IsNullOrWhiteSpace(column.DropdownSource) &&
+                !ColumnDropdownSources.IsKnown(column.DropdownSource))
+            {
+                return ValidationResult.Fail($"منبع فهرست «{column.DropdownSource}» پشتیبانی نمی‌شود.");
+            }
         }
 
         foreach (var feature in sheet.Features)

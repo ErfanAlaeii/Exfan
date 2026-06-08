@@ -32,10 +32,14 @@ public partial class MainWindow : Window
         InitializeComponent();
         Title = PersianStrings.MainWindowTitle;
         WelcomeText.Text = PersianStrings.WelcomeTitle;
+        SubtitleText.Text = PersianStrings.MainSubtitle;
+        ToolsSectionTitle.Text = PersianStrings.MainToolsSectionTitle;
+        TemplatesSectionTitle.Text = PersianStrings.MainTemplatesSectionTitle;
+        PersonnelCardTitle.Text = PersianStrings.ManagePersonnel;
+        PersonnelCardHint.Text = PersianStrings.ManagePersonnelCardHint;
         SearchBox.Text = PersianStrings.SearchPlaceholder;
         SearchBox.Foreground = new System.Windows.Media.SolidColorBrush(
             System.Windows.Media.Color.FromRgb(0x94, 0xA3, 0xB8));
-        SearchBox.LostFocus += SearchBox_LostFocus;
         Loaded += OnLoaded;
     }
 
@@ -138,4 +142,7 @@ public partial class MainWindow : Window
 
         _navigator.ShowTemplateAction(this, template, DefaultCalendar);
     }
+
+    private void ManagePersonnel_Click(object sender, RoutedEventArgs e) =>
+        _navigator.ShowPersonnelManagement(this);
 }

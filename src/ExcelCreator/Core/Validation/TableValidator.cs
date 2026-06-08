@@ -35,6 +35,9 @@ public static class TableValidator
         if (table.TemplateVersion > 0 && table.TemplateVersion != template.Version)
             return ValidationResult.Fail(string.Format(PersianStrings.TableVersionMismatch, table.TemplateVersion, template.Version));
 
+        if (table.CustomColumns is { Count: > 0 })
+            return ValidationResult.Ok();
+
         var sheet = template.RequirePrimarySheet();
         if (table.ColumnHeaders.Count > 0 &&
             !table.ColumnHeaders.SequenceEqual(sheet.Columns.Select(c => c.Header)))

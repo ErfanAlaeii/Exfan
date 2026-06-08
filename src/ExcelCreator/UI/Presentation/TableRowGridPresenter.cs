@@ -41,4 +41,12 @@ public static class TableRowGridPresenter
 
     public static double CalculateGridHeight(int rowCount) =>
         rowCount == 0 ? 0 : UiMetrics.GridHeaderHeight + rowCount * UiMetrics.GridRowHeight + 2;
+
+    public static bool HasMultilineColumns(SheetSpec sheet) =>
+        ColumnDisplayOptions.SheetHasMultilineColumns(sheet);
+
+    public static double GetColumnMinWidth(ColumnSpec column) =>
+        ColumnDisplayOptions.IsMultiline(column)
+            ? UiMetrics.MultilineMinColumnWidth
+            : UiMetrics.MinColumnWidth;
 }

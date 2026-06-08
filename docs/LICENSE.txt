@@ -1,4 +1,4 @@
-Excel Creator (سازنده اکسل خالق: عرفان) — Software License
+Excel Creator Exfan — Software License
 
 Copyright (c) 2026 ExcelCreator. All rights reserved.
 

@@ -1,6 +1,8 @@
 using ExcelCreator.Application.Calculations;
 using ExcelCreator.Application.Export;
 using ExcelCreator.Application.Images;
+using ExcelCreator.Application.Print;
+using ExcelCreator.Application.Personnel;
 using ExcelCreator.Application.Settings;
 using ExcelCreator.Application.Tables;
 using ExcelCreator.Application.Templates;
@@ -26,12 +28,16 @@ public static class ServiceRegistration
         services.AddSingleton<IAppLogger, FileAppLogger>();
         services.AddSingleton<IUserSettingsStore, PresetService>();
         services.AddSingleton<ISavedTableRepository, SavedTableService>();
+        services.AddSingleton<IPersonnelRepository, PersonnelService>();
         services.AddSingleton<ITemplateRepository, TemplateService>();
         services.AddSingleton<IExcelExporter, ExcelWorkbookBuilder>();
         services.AddSingleton<IFileExportDialogService, WpfFileExportDialogService>();
         services.AddSingleton<IImagePickerService, WpfImagePickerService>();
         services.AddSingleton<IImageStorageService, ImageStorageService>();
+        services.AddSingleton<IMediaFileOpener, WpfMediaFileOpener>();
         services.AddSingleton<IExcelExportFacade, ExcelExportFacade>();
+        services.AddSingleton<IPrintService, WpfPrintService>();
+        services.AddSingleton<ITablePrintFacade, TablePrintFacade>();
         services.AddSingleton<ICalculationActionRegistry, CalculationActionRegistry>();
         services.AddSingleton<ICalculationEngine, CalculationEngine>();
         services.AddSingleton<IAppNavigator, AppNavigator>();

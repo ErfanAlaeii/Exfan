@@ -12,10 +12,10 @@
         "name": "فعالیت پرسنل",
         "features": ["freeze_header"],
         "columns": [
-          { "header": "نام", "type": "text", "width": 22 },
+          { "header": "نام", "type": "text", "width": 22, "dropdownSource": "personnel" },
           { "header": "ساعت ورود", "type": "text", "width": 14 },
           { "header": "ساعت خروج", "type": "text", "width": 14 },
-          { "header": "شرح کار", "type": "text", "width": 40 }
+          { "header": "شرح کار", "type": "text", "width": 40, "multiline": true }
         ]
       }
     ]

@@ -60,6 +60,56 @@ public class TableValidatorTests
     }
 
     [Fact]
+    public void ValidateRows_RejectsMissingImageFile()
+    {
+        var imageSheet = new SheetSpec
+        {
+            Columns = [new ColumnSpec { Header = "تصویر", Type = ColumnTypes.Image }]
+        };
+
+        TableValidator.ValidateRows(imageSheet, [["C:\\missing\\photo.jpg"]]).IsValid.Should().BeFalse();
+    }
+
+    [Fact]
+    public void ValidateRows_AcceptsExistingImageFile()
+    {
+        var imageSheet = new SheetSpec
+        {
+            Columns = [new ColumnSpec { Header = "تصویر", Type = ColumnTypes.Image }]
+        };
+        var tempImage = Path.Combine(Path.GetTempPath(), $"Exfan_Test_{Guid.NewGuid():N}.png");
+        File.WriteAllBytes(tempImage, [0x89, 0x50, 0x4E, 0x47]);
+
+        TableValidator.ValidateRows(imageSheet, [[tempImage]]).IsValid.Should().BeTrue();
+    }
+
+    [Fact]
+    public void ValidateRows_RejectsUnsupportedMediaFormat()
+    {
+        var imageSheet = new SheetSpec
+        {
+            Columns = [new ColumnSpec { Header = "تصویر", Type = ColumnTypes.Image }]
+        };
+        var tempFile = Path.Combine(Path.GetTempPath(), $"Exfan_Test_{Guid.NewGuid():N}.txt");
+        File.WriteAllText(tempFile, "test");
+
+        TableValidator.ValidateRows(imageSheet, [[tempFile]]).IsValid.Should().BeFalse();
+    }
+
+    [Fact]
+    public void ValidateRows_AcceptsPdfFile()
+    {
+        var imageSheet = new SheetSpec
+        {
+            Columns = [new ColumnSpec { Header = "تصویر", Type = ColumnTypes.Image }]
+        };
+        var tempPdf = Path.Combine(Path.GetTempPath(), $"Exfan_Test_{Guid.NewGuid():N}.pdf");
+        File.WriteAllText(tempPdf, "%PDF-1.0\n%%EOF");
+
+        TableValidator.ValidateRows(imageSheet, [[tempPdf]]).IsValid.Should().BeTrue();
+    }
+
+    [Fact]
     public void ValidateTemplateCompatibility_RejectsVersionMismatch()
     {
         var table = new SavedTable { TemplateId = "x", TemplateVersion = 1, ColumnHeaders = ["نام", "تاریخ", "مبلغ"] };

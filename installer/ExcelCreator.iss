@@ -1,7 +1,7 @@
 ; Inno Setup script — سازنده اکسل خالق: عرفان
 ; Build with: scripts\build-installer.ps1 (requires Inno Setup 6+)
 
-#define MyAppName "سازنده اکسل خالق: عرفان"
+#define MyAppName "Exfan"
 #define MyAppNameEn "Excel Creator"
 #define MyAppVersion "1.0.0"
 #define MyAppPublisher "ExcelCreator"

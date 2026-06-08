@@ -9,4 +9,5 @@ public interface IAppNavigator
     void ShowSavedTables(Window owner, TemplateDefinition template, DateCalendarKind defaultCalendar);
     void ShowCreateTable(Window owner, TemplateDefinition template, DateCalendarKind defaultCalendar);
     void ShowTableEditor(Window owner, TemplateDefinition template, SavedTable table);
+    void ShowPersonnelManagement(Window owner);
 }

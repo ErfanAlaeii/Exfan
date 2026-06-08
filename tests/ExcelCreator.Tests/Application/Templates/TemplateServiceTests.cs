@@ -34,9 +34,23 @@ public class TemplateServiceTests
 
         var templates = service.LoadAll();
 
-        templates.Should().ContainSingle();
-        templates[0].Id.Should().Be("personnel-activity-report");
-        templates[0].Title.Should().Be("گزارش فعالیت پرسنل");
+        templates.Should().HaveCountGreaterOrEqualTo(2);
+        templates.Should().Contain(t => t.Id == "personnel-activity-report");
+        templates.Should().Contain(t => t.Id == "archive");
+    }
+
+    [Fact]
+    public void LoadAll_FromShippedTemplates_LoadsArchiveTemplate()
+    {
+        var service = CreateService(TestPaths.TemplatesDirectory);
+
+        var template = service.GetById("archive");
+
+        template.Should().NotBeNull();
+        template!.Title.Should().Be("بایگانی");
+        template.RequirePrimarySheet().Columns.Select(c => c.Header)
+            .Should().Equal("شماره", "موضوع", "تصویر");
+        TemplateValidator.Validate(template).IsValid.Should().BeTrue();
     }
 
     [Fact]

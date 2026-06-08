@@ -22,6 +22,7 @@ public static class AppPaths
 
             MigrateFileIfMissing(legacy, current, "settings.json");
             MigrateFileIfMissing(legacy, current, "tables.json");
+            MigrateFileIfMissing(legacy, current, "personnel.json");
 
             return current;
         }
@@ -30,6 +31,8 @@ public static class AppPaths
     public static string SettingsFile => Path.Combine(AppDataDirectory, "settings.json");
 
     public static string TablesFile => Path.Combine(AppDataDirectory, "tables.json");
+
+    public static string PersonnelFile => Path.Combine(AppDataDirectory, "personnel.json");
 
     public static string ImagesDirectory
     {

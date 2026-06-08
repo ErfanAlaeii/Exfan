@@ -29,7 +29,29 @@ public static class PersianStrings
 
     // صفحه اصلی
 
-    public const string MainSubtitle = "یک کار را از پایین انتخاب کنید. ما یک فایل اکسل آماده برای شما می‌سازیم.";
+    public const string MainSubtitle = "یک الگو انتخاب کنید یا ابزارهای زیر را مدیریت کنید.";
+
+    public const string MainToolsSectionTitle = "ابزارها";
+
+    public const string MainTemplatesSectionTitle = "الگوهای گزارش";
+
+    public const string ManagePersonnelCardHint = "افزودن، ویرایش و حذف نام پرسنل شرکت";
+
+    public const string FieldSettings = "تنظیمات فیلدها";
+    public const string FieldSettingsDialogTitle = "تنظیمات فیلدها";
+    public const string FieldSettingsDialogPrompt = "عملیات مورد نظر را انتخاب کنید.";
+    public const string FieldSettingsActionLabel = "عملیات";
+    public const string FieldSettingsAdd = "افزودن";
+    public const string FieldSettingsDelete = "حذف";
+    public const string FieldSettingsEdit = "ویرایش";
+    public const string FieldSettingsFieldNameLabel = "نام فیلد";
+    public const string FieldSettingsSelectFieldLabel = "انتخاب فیلد";
+    public const string FieldSettingsNewNameLabel = "نام جدید";
+    public const string FieldSettingsNameRequired = "نام فیلد را وارد کنید.";
+    public const string FieldSettingsDuplicateName = "فیلدی با این نام از قبل وجود دارد.";
+    public const string FieldSettingsColumnNotFound = "فیلد انتخاب‌شده یافت نشد.";
+    public const string FieldSettingsMinimumColumns = "حداقل یک فیلد باید باقی بماند.";
+    public const string FieldSettingsSelectFieldPrompt = "یک فیلد را انتخاب کنید.";
 
     public const string SearchPlaceholder = "جستجوی الگوها…";
 
@@ -58,6 +80,16 @@ public static class PersianStrings
     public const string ImageClearButton = "حذف فایل";
     public const string ImageNotSelected = "هنوز فایلی انتخاب نشده است.";
     public const string ImageFileMissing = "فایل یافت نشد.";
+    public const string MediaFileMissing = "فایل یافت نشد.";
+    public const string MediaOpenFailed = "فایل باز نشد: {0}";
+    public const string MediaPreviewTitle = "نمایش تصویر";
+    public const string MediaOpenExternal = "باز کردن در برنامه پیش‌فرض";
+    public const string MediaGridClickHint = "یک‌بار کلیک کنید تا فایل باز شود";
+    public const string MultilineGridClickHint = "یک‌بار کلیک کنید تا متن کامل نمایش داده شود";
+    public const string TextPreviewDialogTitle = "نمایش متن";
+    public const string TextPreviewTitleFormat = "{0}";
+    public const string CopyText = "کپی متن";
+    public const string CopyTextSuccess = "متن در حافظه کپی شد.";
     public const string ImagePickerTitle = "انتخاب فایل";
     public const string InvalidImageValue = "سطر {0} — فایل در ستون «{1}» یافت نشد.";
     public const string InvalidMediaFormat = "سطر {0} — فرمت فایل در ستون «{1}» پشتیبانی نمی‌شود.";
@@ -78,6 +110,33 @@ public static class PersianStrings
     public const string AddRowValidation = "حداقل یکی از فیلدها را پر کنید.";
 
     public const string DataEntryEmpty = "هنوز سطری اضافه نشده است. روی «افزودن» کلیک کنید.";
+    public const string SearchRows = "جستجو";
+    public const string SearchRowsDialogTitle = "جستجوی سطرها";
+    public const string SearchRowsDialogPrompt = "فیلد و مقدار جستجو را انتخاب کنید.";
+    public const string SearchFieldLabel = "جستجو بر اساس";
+    public const string SearchValueLabel = "مقدار جستجو";
+    public const string SearchValidation = "مقدار جستجو را وارد کنید.";
+    public const string SearchNoResults = "سطری با این جستجو یافت نشد.";
+    public const string SearchSummaryFormat = "نمایش {0} از {1} سطر (جستجو در «{2}»)";
+    public const string ClearSearch = "نمایش همه";
+
+    public const string ManagePersonnel = "مدیریت پرسنل";
+    public const string PersonnelWindowTitle = "مدیریت پرسنل شرکت";
+    public const string PersonnelHeader = "فهرست پرسنل";
+    public const string PersonnelHint = "نام پرسنل را اضافه، ویرایش یا حذف کنید. در جداول مربوطه از فهرست انتخاب می‌شوند.";
+    public const string PersonnelEmpty = "هنوز پرسنلی ثبت نشده است.";
+    public const string AddPersonnel = "افزودن";
+    public const string EditPersonnel = "ویرایش";
+    public const string DeletePersonnel = "حذف";
+    public const string AddPersonnelDialogTitle = "افزودن پرسنل";
+    public const string EditPersonnelDialogTitle = "ویرایش پرسنل";
+    public const string PersonnelNameLabel = "نام پرسنل";
+    public const string PersonnelNameRequired = "نام پرسنل را وارد کنید.";
+    public const string PersonnelNameDuplicate = "این نام قبلاً ثبت شده است.";
+    public const string PersonnelNotFound = "پرسنل یافت نشد.";
+    public const string SelectPersonnelPrompt = "یک نام از فهرست انتخاب کنید.";
+    public const string DeletePersonnelConfirm = "آیا «{0}» از فهرست پرسنل حذف شود؟";
+    public const string PersonnelListEmpty = "ابتدا از «مدیریت پرسنل» حداقل یک نام ثبت کنید.";
 
     public const string DeleteRow = "حذف";
 
@@ -152,6 +211,8 @@ public static class PersianStrings
     public const string SaveChangesSuccess = "تغییرات با موفقیت ذخیره شد.";
 
     public const string ExportExcel = "خروجی اکسل";
+    public const string PrintTable = "چاپ";
+    public const string PrintNoRows = "برای چاپ، حداقل یک سطر وارد کنید.";
 
     public const string UnsavedChangesPrompt = "تغییرات ذخیره نشده‌اند. آیا می‌خواهید قبل از خروج ذخیره کنید؟";
 

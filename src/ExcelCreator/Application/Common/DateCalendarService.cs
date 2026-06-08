@@ -103,6 +103,35 @@ public static class DateCalendarService
         }
     }
 
+    public static void GetJalaliParts(DateTime date, out int year, out int month, out int day)
+    {
+        year = Persian.GetYear(date);
+        month = Persian.GetMonth(date);
+        day = Persian.GetDayOfMonth(date);
+    }
+
+    public static bool TryFromJalaliParts(int year, int month, int day, out DateTime result) =>
+        TryJalaliParts(year, month, day, out result);
+
+    public static int GetJalaliDaysInMonth(int year, int month) =>
+        Persian.GetDaysInMonth(year, month);
+
+    public static string FormatGregorianSearchValue(DateTime date) =>
+        date.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+    public static int GetJalaliGridColumn(DayOfWeek dayOfWeek) =>
+        dayOfWeek switch
+        {
+            DayOfWeek.Saturday => 0,
+            DayOfWeek.Sunday => 1,
+            DayOfWeek.Monday => 2,
+            DayOfWeek.Tuesday => 3,
+            DayOfWeek.Wednesday => 4,
+            DayOfWeek.Thursday => 5,
+            DayOfWeek.Friday => 6,
+            _ => 0
+        };
+
     private static bool TryGregorianParts(int year, int month, int day, out DateTime result)
     {
         try
